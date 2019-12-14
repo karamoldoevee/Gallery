@@ -28,7 +28,9 @@ class PhotoCreateView(CreateView):
     fields = ('image', 'signature', 'likes', 'author')
 
     def get_success_url(self):
+        author = self.request.user,
         return reverse('webapp:photo_view', kwargs={'pk': self.object.pk})
+
 
 
 class PhotoUpdateView(UpdateView):

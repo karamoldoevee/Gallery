@@ -1,10 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-</body>
-</html>
+{% block title %}Удалить Фото{% endblock %}
+
+{% block menu %}
+    <li><a href="{% url 'webapp:photo_view' photo.pk %}">Подробнее</a></li>
+{% endblock %}
+
+{% block content %}
+            <h1>Вы уверены что хотите удалить "{{ photo.image }}"?</h1>
+            <form method="POST" action="{% url 'webapp:photo_delete' photo.pk %}" class="text-center">
+                {% csrf_token %}
+                <p><input type="submit" value="Да"></p>
+                <p><a href="{% url 'webapp:photo_view' photo.pk %}">Нет</a></p>
+            </form>
+{% endblock %}
