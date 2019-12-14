@@ -7,9 +7,9 @@ from api import views
 
 router = routers.DefaultRouter()
 
-router.register(r'photos', views.PhotoViewSet)
-
 router.register(r'comments', views.CommentViewSet)
+
+router.register(r'like', views.LikeViewSet)
 
 app_name = 'api'
 

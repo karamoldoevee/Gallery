@@ -23,10 +23,12 @@
             <p>Подпись: {{ photo.signature }}</p>
             <p>Автор: {{ photo.author }}</p>
             <p>Cоздана: {{ photo.created_at|date:'Y-m-d H:i:s' }}</p>
-            <p>Лайки: {{ photo.likes.count }}</p>
+            <p>Лайки: {{ photo.likes }}</p>
             <a href="{% url 'webapp:photo_view' photo.pk %}">Подробнее.</a>
-            <a href="{% url 'webapp:photo_change' photo.pk %}">Обновить</a>
-            <a href="{% url "webapp:photo_delete" photo.pk %}">Удалить</a>
+            {% if perms.webapp.change_photo or request.user == photo.author%}
+                <a href="{% url 'webapp:photo_change' photo.pk %}">Обновить</a>
+                <a href="{% url "webapp:photo_delete" photo.pk %}">Удалить</a>
+            {% endif %}
         <hr/>
     {% endfor %}
     {% if is_paginated %}

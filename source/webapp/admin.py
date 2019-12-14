@@ -10,7 +10,7 @@ class ReviewtAdmin(admin.TabularInline):
 
 
 class ProductAdmin(admin.ModelAdmin):
-    fields = ['image', 'signature', 'author']
+    fields = ['image', 'signature', 'author', 'likes']
     list_display = ['pk', 'image', 'signature', 'author', 'created_at']
     list_display_links = ['pk']
     inlines = [ReviewtAdmin]

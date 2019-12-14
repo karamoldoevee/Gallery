@@ -3,12 +3,10 @@
 {% block title %}{{ photo.signature }}{% endblock %}
 
 {% block menu %}
-{#    {% if perms.webapp.change_photo or self.photo.author %}#}
+    {% if perms.webapp.change_photo or request.user == photo.author%}
     <li><a href="{% url 'webapp:photo_change' photo.pk %}">Обновить</a></li>
-{#    {% endif %}#}
-{#    {% if perms.webapp.delete_photo %}#}
     <li><a href="{% url 'webapp:photo_delete' photo.pk %}">Удалить</a></li>
-{#    {% endif %}#}
+    {% endif %}
 {% endblock %}
 
 {% block content %}
@@ -21,7 +19,7 @@
         <p>Подпись: {{ photo.signature }}</p>
         <p>Автор: {{ photo.author }}</p>
         <p>Cоздана: {{ photo.created_at|date:'Y-m-d H:i:s' }}</p>
-        <p>Лайки: {{ photo.likes.count}}</p>
+        <p>Лайки: {{ photo.likes}}</p>
     </div>
     <hr/>
     <h3>Отзывы:</h3>

@@ -68,6 +68,7 @@ class PhotoDeleteView(PermissionRequiredMixin, DeleteView):
 
     context_object_name = 'photo'
 
+
     success_url = reverse_lazy('webapp:index')
 
     def has_permission(self):
