@@ -15,7 +15,7 @@
         <ul class="menu">
             <li><a href="{% url 'webapp:index' %}">Главная страница</a></li>
             {% if request.user.is_authenticated %}
-                <li class="menu-right"><a href="{% url 'webapp:logout' %}" class="nav-link">Выход</a></li>
+                <li class="menu-right">Привет {{ user }}<a href="{% url 'webapp:logout' %}" class="nav-link">Выход</a></li>
             {% else %}
                 <li class="menu-right"><a href="{% url 'webapp:login' %}" class="nav-link">Вход</a></li>
             {% endif %}

@@ -20,10 +20,10 @@
         {% else %}
             <img src="{% static "images/nophoto.png" %}" width="200" height="200" alt="Заглушка" >
         {% endif %}
-            <p>{{ photo.signature }}></p>
-            <p>{{ photo.author }}</p>
-            <p>{{ photo.created_at }}</p>
-            <p>{{ photo.likes }}</p>
+            <p>Подпись: {{ photo.signature }}</p>
+            <p>Автор: {{ photo.author }}</p>
+            <p>Cоздана: {{ photo.created_at|date:'Y-m-d H:i:s' }}</p>
+            <p>Лайки: {{ photo.likes.count }}</p>
             <a href="{% url 'webapp:photo_view' photo.pk %}">Подробнее.</a>
             <a href="{% url 'webapp:photo_change' photo.pk %}">Обновить</a>
             <a href="{% url "webapp:photo_delete" photo.pk %}">Удалить</a>

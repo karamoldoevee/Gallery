@@ -3,8 +3,12 @@
 {% block title %}{{ photo.signature }}{% endblock %}
 
 {% block menu %}
+{#    {% if perms.webapp.change_photo or self.photo.author %}#}
     <li><a href="{% url 'webapp:photo_change' photo.pk %}">Обновить</a></li>
+{#    {% endif %}#}
+{#    {% if perms.webapp.delete_photo %}#}
     <li><a href="{% url 'webapp:photo_delete' photo.pk %}">Удалить</a></li>
+{#    {% endif %}#}
 {% endblock %}
 
 {% block content %}
@@ -17,7 +21,7 @@
         <p>Подпись: {{ photo.signature }}</p>
         <p>Автор: {{ photo.author }}</p>
         <p>Cоздана: {{ photo.created_at|date:'Y-m-d H:i:s' }}</p>
-        <p>Лайк: {{ photo.likes }}</p>
+        <p>Лайки: {{ photo.likes.count}}</p>
     </div>
     <hr/>
     <h3>Отзывы:</h3>
@@ -31,8 +35,8 @@
                 <p class="text col-12 align-self-center">Дата создания: {{ comment.created_at|date:'Y-m-d H:i:s' }}</p>
                 <div class="pre">{{ comment.text }}</div>
 {#                <p class="comment-links">#}
-{#                        <a href="{% url 'webapp:review_change' review.pk %}">Обновить</a>#}
-{#                        <a href="{% url 'webapp:review_delete' review.pk %}">Удалить</a>#}
+{#                        <a href="{% url 'webapp:review_change' comment.pk %}">Обновить</a>#}
+{#                        <a href="{% url 'webapp:review_delete' comment.pk %}">Удалить</a>#}
 {#                </p>#}
             <hr>
             </div>
