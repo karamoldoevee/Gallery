@@ -27,7 +27,7 @@ class PhotoView(DetailView):
 class PhotoCreateView(LoginRequiredMixin, CreateView):
     model = Photo
     template_name = 'photo/add.html'
-    fields = ('image', 'signature', 'likes')
+    fields = ('image', 'signature')
 
     def form_valid(self, form):
         self.object = Photo.objects.create(author=self.request.user, image=form.cleaned_data['image'],
@@ -45,7 +45,7 @@ class PhotoUpdateView(PermissionRequiredMixin, UpdateView):
     permission_denied_message = "Доступ запрещён"
 
     template_name = 'photo/change.html'
-    fields = ('image', 'signature', 'likes', 'author')
+    fields = ('image', 'signature', 'author')
     context_object_name = 'photo'
 
     def has_permission(self):

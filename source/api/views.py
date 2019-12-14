@@ -1,4 +1,5 @@
 from rest_framework import viewsets
+
 from rest_framework.response import Response
 
 from webapp.models import Comment, Like, Photo
@@ -39,7 +40,7 @@ class LikeViewSet(viewsets.ModelViewSet):
     def delete(self, request, *args, **kwargs):
         pk = request.data.get('image')
         image = Photo.objects.get(pk=pk)
-        if not self.queryset.filter(image=image) is None:
+        if not self.queryset.filter(image=image):
             return Response({'error': 'Нету Лайка'}, status=400)
         image.likes -= 1
         image.save()
