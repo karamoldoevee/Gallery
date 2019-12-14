@@ -1,5 +1,4 @@
 from rest_framework import viewsets
-from rest_framework.decorators import action
 from rest_framework.response import Response
 
 from webapp.models import Comment, Like, Photo
@@ -31,7 +30,7 @@ class LikeViewSet(viewsets.ModelViewSet):
     def create(self, request, *args, **kwargs):
         pk = request.data.get('image')
         image = Photo.objects.get(pk=pk)
-        if self.queryset.filter(image=image) is not None:
+        if self.queryset.filter(image=image):
             return Response({'error': 'Уже есть лайк'}, status=400)
         image.likes += 1
         image.save()
@@ -40,8 +39,8 @@ class LikeViewSet(viewsets.ModelViewSet):
     def delete(self, request, *args, **kwargs):
         pk = request.data.get('image')
         image = Photo.objects.get(pk=pk)
-        # if self.queryset.filter(image=image) is None:
-        #     return Response({'error': 'Нету Лайка'}, status=400)
+        if not self.queryset.filter(image=image) is None:
+            return Response({'error': 'Нету Лайка'}, status=400)
         image.likes -= 1
         image.save()
         return super(LikeViewSet, self).create(request, *args, **kwargs)
