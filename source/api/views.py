@@ -1,3 +1,26 @@
-from django.shortcuts import render
+from rest_framework import viewsets
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
-# Create your views here.
+from webapp.models import Photo, Comment
+
+from api.serializers import PhotoSerializer, CommentSerializer
+
+from rest_framework.authentication import SessionAuthentication
+from rest_framework.permissions import AllowAny, DjangoModelPermissions, IsAuthenticated
+
+SAFE_METHODS = ('GET', 'HEAD', 'OPTIONS')
+
+
+class PhotoViewSet(viewsets.ModelViewSet):
+    queryset = Photo.objects.all()
+    serializer_class = PhotoSerializer
+    authentication_classes = SessionAuthentication
+    permission_classes = IsAuthenticated
+
+
+class CommentViewSet(viewsets.ModelViewSet):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
+    authentication_classes = SessionAuthentication
+    permission_classes = IsAuthenticated
